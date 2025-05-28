@@ -3,6 +3,7 @@
 #include "stm32f4xx_hal.h"
 #include "UartLink.hpp"
 #include "DCMotor.hpp"
+#include "message.hpp"
 
 extern UART_HandleTypeDef huart2;
 UartLink uart_link(&huart2, 0);
