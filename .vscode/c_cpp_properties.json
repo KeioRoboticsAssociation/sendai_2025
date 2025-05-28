@@ -1,0 +1,20 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "STM32",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "intelliSenseMode": "${default}",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/Inc",
+                "${workspaceFolder}/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "${workspaceFolder}/Core/Inc",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "${workspaceFolder}/Lib/RogiLinkFlex/Inc",
+                "${workspaceFolder}/Lib/DCMotor/Inc",
+                "${workspaceFolder}/Drivers/CMSIS/Include"
+            ]
+        }
+    ]
+}
