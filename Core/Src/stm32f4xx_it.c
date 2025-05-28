@@ -59,7 +59,7 @@ extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
 /* USER CODE BEGIN EV */
-
+extern UART_HandleTypeDef huart2;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -243,5 +243,11 @@ void TIM7_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
+#ifndef USART2_IRQ_HANDLER_IMPLEMENTED // Guard to prevent redefinition if it was somehow already added
+#define USART2_IRQ_HANDLER_IMPLEMENTED
+void USART2_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&huart2);
+}
+#endif
 /* USER CODE END 1 */
