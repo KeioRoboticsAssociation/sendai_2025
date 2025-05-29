@@ -19,12 +19,37 @@ DCMotor motor1(&htim1, TIM_CHANNEL_1, GPIOB, GPIO_PIN_1, true, 0.5f);
 DCMotor motor2(&htim1, TIM_CHANNEL_2, GPIOB, GPIO_PIN_4, true, 0.5f);
 DCMotor motor3(&htim1, TIM_CHANNEL_3, GPIOB, GPIO_PIN_15, true, 0.5f);
 
+// Callback function for motor control
+void motor_control_callback(float val1, float val2, float val3)
+{
+    motor1.setDuty(val1 * 0.5f);
+    motor2.setDuty(val2 * 0.5f);
+    motor3.setDuty(val3 * 0.5f);
+}
+
+// UartLinkSubscriber instance for motor control
+UartLinkSubscriber<float, float, float> motor_subscriber(&uart_link, messages::reception::STEER, &motor_control_callback);
+
 void setup()
 {
     // ここに初期化処理を書く
+    motor1.start();
+    motor2.start();
+    motor3.start();
+    uart_link.start();
 }
 
 void loop()
 {
     // ここに繰り返し処理を書く
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if (huart->Instance == USART2) // Check instance directly for safety
+  {
+    // Forward to the UartLink interrupt handler
+    // Ensure uart_link is accessible here (it's global in main.cpp)
+    uart_link.interrupt();
+  }
 }
