@@ -44,9 +44,6 @@ void loop()
     // ここに繰り返し処理を書く
 }
 
-#ifndef HAL_UART_RX_CPT_CALLBACK_IMPLEMENTED // Guard to prevent redefinition
-#define HAL_UART_RX_CPT_CALLBACK_IMPLEMENTED
-
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if (huart->Instance == USART2) // Check instance directly for safety
@@ -56,5 +53,3 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     uart_link.interrupt();
   }
 }
-
-#endif // HAL_UART_RX_CPT_CALLBACK_IMPLEMENTED
