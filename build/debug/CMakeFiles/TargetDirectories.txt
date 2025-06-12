@@ -1,0 +1,6 @@
+/home/imanoob/hal_ws/sendai_2025/sendai_2025/build/debug/CMakeFiles/sendai_2025.dir
+/home/imanoob/hal_ws/sendai_2025/sendai_2025/build/debug/CMakeFiles/edit_cache.dir
+/home/imanoob/hal_ws/sendai_2025/sendai_2025/build/debug/CMakeFiles/rebuild_cache.dir
+/home/imanoob/hal_ws/sendai_2025/sendai_2025/build/debug/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+/home/imanoob/hal_ws/sendai_2025/sendai_2025/build/debug/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+/home/imanoob/hal_ws/sendai_2025/sendai_2025/build/debug/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

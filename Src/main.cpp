@@ -6,7 +6,8 @@
 #include "message.hpp"
 
 extern UART_HandleTypeDef huart2;
-UartLink uart_link(&huart2, 0);
+UartLink uart(&huart2, 0);
+Subscriber<UartLink, float, float, float> motor_subscriber(uart, messages::reception::STEER);
 
 extern TIM_HandleTypeDef htim1; // for pwm leg
 extern TIM_HandleTypeDef htim2; // for pwm arm
@@ -27,29 +28,26 @@ void motor_control_callback(float val1, float val2, float val3)
     motor3.setDuty(val3 * 0.5f);
 }
 
-// UartLinkSubscriber instance for motor control
-UartLinkSubscriber<float, float, float> motor_subscriber(&uart_link, messages::reception::STEER, &motor_control_callback);
-
 void setup()
 {
     // ここに初期化処理を書く
     motor1.start();
     motor2.start();
     motor3.start();
-    uart_link.start();
+    uart.start();
+    motor_subscriber.set_callback(motor_control_callback);
 }
 
 void loop()
 {
-    // ここに繰り返し処理を書く
+    motor1.setDuty(0.1);
+    HAL_Delay(100);
+    motor1.setDuty(-0.1);
+    HAL_Delay(100);
 }
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-  if (huart->Instance == USART2) // Check instance directly for safety
-  {
-    // Forward to the UartLink interrupt handler
-    // Ensure uart_link is accessible here (it's global in main.cpp)
-    uart_link.interrupt();
-  }
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    if (huart->Instance == USART2) {
+        uart.interrupt();
+    }
 }

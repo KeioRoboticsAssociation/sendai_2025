@@ -47,10 +47,11 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 # Add sources to executable
+file(GLOB_RECURSE USER_SOURCES Src/*.c Src/*.cpp)
 file(GLOB_RECURSE USER_LIB_SOURCES Lib/*/Src/*.c Lib/*/Src/*.cpp)
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
-    Core/Src/main.cpp
+    ${USER_SOURCES}
     ${USER_LIB_SOURCES}
 )
 
